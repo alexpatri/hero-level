@@ -2,55 +2,69 @@
 
 typedef struct hero {
     std::string name;
-    long int level;
+    int victorys;
+    int defeats;
 } Hero;
 
+Hero newHero(void);
+int sub(int, int);
 std::string classification(int);
 
 int main(void) {
 
-    Hero hero;
-
     std::cout << "======= CLASSIFICACAO DO HEROI =======\n";
-    std::cout << "Nome do Heroi: ";
-    std::getline(std::cin, hero.name);
-
-    std::cout << "Nivel do Heroi: ";
-    std::cin >> hero.level;
-
-    std::cout << "O Heroi de nome: " << hero.name << " esta no nivel: " << classification(hero.level) << '\n';
+    Hero hero = { newHero() };
+    int balance = { sub(hero.victorys, hero.defeats) };
+    
+    std::cout << "O Heroi tem saldo de " << balance << " vitorias e esta no nivel " << classification(balance) << ".\n";
 
     return 0;
 }
 
-std::string classification(int level) {
-    if (level <= 1000) {
+Hero newHero(void) {
+    Hero hero;
+
+    std::cout << "Nome do Heroi: ";
+    std::getline(std::cin, hero.name);
+
+    std::cout << "Vitorias: ";
+    std::cin >> hero.victorys;
+
+    std::cout << "Derrotas: ";
+    std::cin >> hero.defeats;
+
+    return hero;
+}
+
+int sub(int value1, int value2) {
+    return value1 - value2;
+}
+
+std::string classification(int balance) {
+    if (balance <= 10) {
         return "Ferro";
     }
 
-    if (level <= 2000) {
+    if (balance <= 20) {
         return "Bronze";
     }
 
-    if (level <= 5000) {
+    if (balance <= 50) {
         return "Prata";
     }
 
-    if (level <= 7000) {
+    if (balance <= 80) {
         return "Ouro";
     }
 
-    if (level <= 8000) {
-        return "Platina";
+    if (balance <= 90) {
+        return "Diamante";
     }
 
-    if (level <= 9000) {
-        return "Ascedente";
+    if (balance <= 100) {
+        return "Lendario";
     }
 
-    if (level <= 10000) {
-        return "Imortal";
-    }
-
-    return "Radiante";
+    return "Imortal";
 }
+
